@@ -1,7 +1,5 @@
 systemd mounts
 ==============
-[![Build Status](https://travis-ci.org/ypsman/ansible-systemd-mounts.svg?branch=master)](https://travis-ci.org/ypsman/ansible-systemd-mounts)
-
 Setup mounts as sysemd Service.
 
 This Playbook creates a Systemd Service for mounting Shares.
@@ -11,7 +9,7 @@ So you can use mounts as system Servie.
 Works for debian stretch, and Jessie if you use systemd.
 
 for Example:
-    
+
     systemctl status mount-point.mount
     systemctl start mount-point.mount
     systemctl stop mount-point.mount
