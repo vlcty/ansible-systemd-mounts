@@ -9,7 +9,6 @@
     mode:
   with_dict: "{{ mounts }}"
   notify: Enable systemd mount
-  when: item.key is defined
 
 - name: Setup systemd Service for automount
   template:
