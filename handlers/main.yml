@@ -1,5 +1,4 @@
 ---
-# handlers file for systemd-mounts
 - name: reload systemd
   command: systemctl daemon-reload
 

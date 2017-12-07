@@ -1,5 +1,4 @@
 ---
-# tasks file for systemd-mounts
 - name: Setup systemd Service for mountpoints
   template:
     src: systemd_mount.j2
