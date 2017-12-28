@@ -2,17 +2,11 @@
 - name: Setup systemd Service for mountpoints
   template:
     src: systemd_mount.j2
-    dest: "/etc/systemd/system/{{ item.key }}.mount"
+    dest: "/etc/systemd/system/{{ item.value.mount[1:] | replace('/', '-') }}.mount"
     owner: root
     group: root
     mode:
   with_dict: "{{ mounts }}"
   notify: Enable systemd mount
 
-- name: Setup systemd Service for automount
-  template:
-    src: systemd_automount.j2
-    dest: "/etc/systemd/system/{{ item.key }}.automount"
-  with_dict: "{{ mounts }}"
-  notify: Enable systemd automount
-  when: item.value.automount is defined
+- meta: flush_handlers
