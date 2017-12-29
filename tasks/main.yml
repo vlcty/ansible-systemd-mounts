@@ -1,12 +1,23 @@
 ---
+
+- name: Create needed UNIX users first
+  user:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ mounts_users }}"
+
 - name: Setup systemd Service for mountpoints
   template:
     src: systemd_mount.j2
     dest: "/etc/systemd/system/{{ item.value.mount[1:] | replace('/', '-') }}.mount"
     owner: root
     group: root
-    mode:
   with_dict: "{{ mounts }}"
-  notify: Enable systemd mount
 
-- meta: flush_handlers
+- name: Start mounts
+  systemd:
+      name: "{{ item.value.mount[1:] | replace('/', '-') }}.mount"
+      state: started
+      enabled: true
+      daemon_reload: true
+  with_dict: "{{ mounts }}"

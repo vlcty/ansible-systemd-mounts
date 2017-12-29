@@ -1,13 +1,3 @@
 ---
 - name: reload systemd
   command: systemctl daemon-reload
-
-- name: Enable systemd mount
-  command: systemctl enable  "{{ item.value.mount[1:] | replace('/', "-") }}.mount"
-  with_dict: "{{ mounts }}"
-  notify: Start systemd mount
-
-- name: Start systemd mount
-  command: systemctl start  "{{ item.value.mount[1:] | replace('/', "-") }}.mount"
-  with_dict: "{{ mounts }}"
-  notify: reload systemd
